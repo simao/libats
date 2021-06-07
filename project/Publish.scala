@@ -13,9 +13,9 @@ object Publish {
 
   lazy val repoHost = URI.create(repoUrl).getHost
 
-  lazy val repoUser = readSettings("PUBLISH_USER")
+  lazy val repoUser = readSettings("GITHUB_USER")
 
-  lazy val repoPassword = readSettings("PUBLISH_PASSWORD")
+  lazy val repoPassword = readSettings("GITHUB_TOKEN")
 
   lazy val repoUrl = readSettings("PUBLISH_URL")
 
@@ -26,9 +26,9 @@ object Publish {
     publishTo := version { v: String =>
       val server = repoUrl
       if (v.trim.endsWith("SNAPSHOT"))
-        Some("snapshots" at server + "snapshots")
+        Some("snapshots" at server)
       else
-        Some("releases"  at server + "releases")
+        Some("releases"  at server)
     }.value
   )
 
